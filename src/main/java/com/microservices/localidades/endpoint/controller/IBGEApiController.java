@@ -10,6 +10,11 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
+/**
+ * @author Jônatas Tonholo
+ *
+ * A Rest controller for receive and answear HTTP RESTful requirements
+ */
 @RestController
 @Getter
 @Slf4j
@@ -21,10 +26,10 @@ public class IBGEApiController {
      * Clear the cache of Localidades from IBGEApiService
      * @return ResponseEntity
      */
-    @GetMapping(value="localidades/clearCache")
-    public ResponseEntity clearCacheLocalidades() {
+    @GetMapping(value="localidades/cache/clear")
+    public ResponseEntity clearCache() {
         log.debug("IBGEApiController.clearCacheLocalidades");
-        log.info("localidades/clearCache");
+        log.info("localidades/cache/clear");
         return ResponseEntity.ok(this._IBGEApiService.cleanLocalidadesCache());
     }
 }

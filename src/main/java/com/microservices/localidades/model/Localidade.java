@@ -1,7 +1,20 @@
 package com.microservices.localidades.model;
 
-import lombok.*;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.AllArgsConstructor;
+import lombok.ToString;
+import lombok.EqualsAndHashCode;
+import lombok.Data;
 
+/**
+ * @author Jônatas Tonholo
+ * The entity called "Localidade" (in english: locations)
+ * was named in Portuguese to facilitate the relationship
+ * between that entity and the brazilian API of citis from IBGE
+ */
 @Builder
 @Data
 @Getter

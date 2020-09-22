@@ -22,10 +22,11 @@ class JSONControllerTest {
 //    @Test
 //    void getJSONLocalidades() {
 //        try {
+//
 //            RequestBuilder request = MockMvcRequestBuilders.get("localidades/json");
 //            MvcResult result = mvc.perform(request).andReturn();
 //            String resultStr = result.getResponse().getContentAsString();
-//            assert resultStr != "Erro ao obter JSON de localidades";
+//            assertNotEquals("Erro ao obter JSON de localidades", resultStr);
 //        } catch (Exception e) {
 //            assert false;
 //        }

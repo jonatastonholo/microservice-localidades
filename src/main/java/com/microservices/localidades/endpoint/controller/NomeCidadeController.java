@@ -2,14 +2,13 @@ package com.microservices.localidades.endpoint.controller;
 
 import com.microservices.localidades.endpoint.service.IBGEApiService;
 import com.microservices.localidades.model.Municipio;
+import com.microservices.localidades.util.StringUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
-
 import java.util.List;
 
 /**
@@ -24,19 +23,15 @@ public class NomeCidadeController {
     private IBGEApiService _IBGEApiService;
 
     /**
-     * Request to IBGE's API the Localidades and return a JSON as response
+     * Request to IBGE's API the Localidades without caching and return a JSON as response
      * @return ResponseEntity
      */
     @GetMapping(value = "localidades/id/{nomeCidade}")
-    public ResponseEntity getNomeCidadeWithCache(@PathVariable String nomeCidade) {
-        log.debug("NomeCidadeController.getNomeCidadeWithCache");
+    public ResponseEntity getNomeCidadeWithoutCache(@PathVariable String nomeCidade) {
+        log.debug("NomeCidadeController.getNomeCidadeWithoutCache");
         log.info("localidades/id/" + nomeCidade);
         try {
-            List<Municipio> municipios = this._IBGEApiService.getCitiesWithCache();
-            Municipio municipio = filterMunicipio(municipios,nomeCidade);
-            if(municipio == null) throw new Exception("City not found");
-            log.info("Responding ok");
-            return ResponseEntity.ok(municipio.getId());
+            return ResponseEntity.ok(getMunicipioId(nomeCidade, false));
         }
         catch (Exception e) {
             log.error(e.getMessage());
@@ -45,24 +40,37 @@ public class NomeCidadeController {
     }
 
     /**
-     * Request to IBGE's API the Localidades without caching and return the response as JSON
+     * Request to IBGE's API the Localidades with caching and return the response as JSON
      * @return ResponseEntity
      */
-    @GetMapping(value="localidades/id/{nomeCidade}/withoutCache")
-    public ResponseEntity getNomeCidadeWithoutCache(@PathVariable String nomeCidade) {
-        log.debug("NomeCidadeController.getNomeCidadeWithoutCache");
-        log.info("localidades/id/" + nomeCidade);
+    @GetMapping(value="localidades/cache/id/{nomeCidade}")
+    public ResponseEntity getNomeCidadeWithCache(@PathVariable String nomeCidade) {
+        log.debug("NomeCidadeController.getNomeCidadeWithCache");
+        log.info("localidades/cache/id/" + nomeCidade);
         try {
-            List<Municipio> municipios = this._IBGEApiService.getCitiesWithoutCache();
-            Municipio municipio = filterMunicipio(municipios,nomeCidade);
-            if(municipio == null) throw new Exception("City not found");
-            log.info("Responding ok");
-            return ResponseEntity.ok(municipio.getId());
+            return ResponseEntity.ok(getMunicipioId(nomeCidade, true));
         }
         catch (Exception e) {
             log.error(e.getMessage());
             return ResponseEntity.ok(e.getMessage());
         }
+    }
+
+    /**
+     * Find city by name and return it's id
+     * @param nome
+     * @param withCache
+     * @return The city id or exception if the city was not found
+     * @throws Exception
+     */
+    private Long getMunicipioId(String nome, boolean withCache) throws Exception {
+        final List<Municipio> municipios =
+                withCache
+                ? this._IBGEApiService.getCitiesOnlyWithCache()
+                : this._IBGEApiService.getCitiesOnlyWithoutCache();
+        final Municipio municipio = filterMunicipio(municipios,nome);
+        if(municipio == null) throw new Exception("City not found");
+        return municipio.getId();
     }
 
     /**
@@ -73,7 +81,7 @@ public class NomeCidadeController {
      */
     private Municipio filterMunicipio(List<Municipio> municipios, String name) {
         return municipios.stream()
-                .filter(m -> name.toLowerCase().equals(m.getNome().toLowerCase()))
+                .filter(m -> StringUtils.normalizeString(name).equals(StringUtils.normalizeString(m.getNome())))
                 .findAny()
                 .orElse(null);
     }
