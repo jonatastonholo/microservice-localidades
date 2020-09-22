@@ -1,4 +1,4 @@
-**Software version:** 0.0.2-SNAPSHOT
+**Software version:** 0.0.3-SNAPSHOT
 
 **Autor:** Jônatas Ribeiro Tonholo
 
@@ -95,4 +95,6 @@ Qualquer Endpoint chamado com **localidades/cache/*** realizará as consultas à
 > - Com cache: localidades/cache/clear
 
 ---
-
+## Diagrama de classes
+> https://bitbucket.org/jonatas_tonholo/microservices-localidade/src/master/src/main/java/com/microservices/localidades/docs/class_diagram.png
+![](https://bitbucket.org/jonatas_tonholo/microservices-localidade/src/master/src/main/java/com/microservices/localidades/docs/class_diagram.png)

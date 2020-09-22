@@ -10,7 +10,7 @@
     </parent>
     <groupId>com.microservices</groupId>
     <artifactId>localidades</artifactId>
-    <version>0.0.2-SNAPSHOT</version>
+    <version>0.0.3-SNAPSHOT</version>
     <name>localidades</name>
     <description>Consulta API de localidades do IBGE e retorna CSV ou JSON</description>
 
