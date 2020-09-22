@@ -4,6 +4,7 @@ import com.microservices.localidades.endpoint.service.IBGEApiService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -18,7 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class JSONController {
     @Autowired
-    private IBGEApiService _IBGEApiService;
+    private IBGEApiService ibgeApiService;
 
     /**
      * Request to IBGE's API the Localidades without caching and return a JSON as response
@@ -29,12 +30,16 @@ public class JSONController {
         log.debug("JSONController.getLocalidadesWithoutCache");
         log.info("localidades/json");
         try {
-            return ResponseEntity.ok(this._IBGEApiService.getLocalidadesWithoutCache());
+            return ResponseEntity
+                    .status(HttpStatus.OK)
+                    .body(this.ibgeApiService.getLocalidadesWithoutCache());
         }
         catch (Exception e) {
             final String msg = "Error while getting the JSON Localidades without cache";
             log.error(msg);
-            return ResponseEntity.ok(msg);
+            return ResponseEntity
+                    .status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body(msg);
         }
     }
 
@@ -47,12 +52,16 @@ public class JSONController {
         log.debug("JSONController.getLocalidadesWithCache");
         log.info("localidades/cache/json");
         try {
-            return ResponseEntity.ok(this._IBGEApiService.getLocalidadesWithCache());
+            return ResponseEntity
+                    .status(HttpStatus.OK)
+                    .body(this.ibgeApiService.getLocalidadesWithCache());
         }
         catch (Exception e) {
             final String msg = "Error while getting the JSON Localidades with cache";
             log.error(msg);
-            return ResponseEntity.ok(msg);
+            return ResponseEntity
+                    .status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body(msg);
         }
     }
 

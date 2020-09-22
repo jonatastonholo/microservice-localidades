@@ -1,10 +1,12 @@
 package com.microservices.localidades.endpoint.controller;
 
 import com.microservices.localidades.endpoint.service.IBGEApiService;
+import com.microservices.localidades.exceptions.APILocalidadesException;
 import com.microservices.localidades.model.Municipio;
 import com.microservices.localidades.util.StringUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -20,7 +22,9 @@ import java.util.List;
 @Slf4j
 public class NomeCidadeController {
     @Autowired
-    private IBGEApiService _IBGEApiService;
+    private IBGEApiService ibgeApiService;
+
+    private static final String MSG_CITY_NOT_FOUND = "City not found";
 
     /**
      * Request to IBGE's API the Localidades without caching and return a JSON as response
@@ -34,8 +38,11 @@ public class NomeCidadeController {
             return ResponseEntity.ok(getMunicipioId(nomeCidade, false));
         }
         catch (Exception e) {
-            log.error(e.getMessage());
-            return ResponseEntity.ok(e.getMessage());
+            final String msg = e.getMessage();
+            log.error(msg);
+            return ResponseEntity
+                    .status(msg.equals(MSG_CITY_NOT_FOUND) ? HttpStatus.NOT_FOUND : HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body(msg);
         }
     }
 
@@ -51,8 +58,11 @@ public class NomeCidadeController {
             return ResponseEntity.ok(getMunicipioId(nomeCidade, true));
         }
         catch (Exception e) {
-            log.error(e.getMessage());
-            return ResponseEntity.ok(e.getMessage());
+            final String msg = e.getMessage();
+            log.error(msg);
+            return ResponseEntity
+                    .status(msg.equals(MSG_CITY_NOT_FOUND) ? HttpStatus.NOT_FOUND : HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body(msg);
         }
     }
 
@@ -63,13 +73,13 @@ public class NomeCidadeController {
      * @return The city id or exception if the city was not found
      * @throws Exception
      */
-    private Long getMunicipioId(String nome, boolean withCache) throws Exception {
+    private Long getMunicipioId(String nome, boolean withCache) throws APILocalidadesException {
         final List<Municipio> municipios =
                 withCache
-                ? this._IBGEApiService.getCitiesOnlyWithCache()
-                : this._IBGEApiService.getCitiesOnlyWithoutCache();
+                ? this.ibgeApiService.getCitiesOnlyWithCache()
+                : this.ibgeApiService.getCitiesOnlyWithoutCache();
         final Municipio municipio = filterMunicipio(municipios,nome);
-        if(municipio == null) throw new Exception("City not found");
+        if(municipio == null) throw new APILocalidadesException(MSG_CITY_NOT_FOUND);
         return municipio.getId();
     }
 

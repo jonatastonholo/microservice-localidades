@@ -95,3 +95,4 @@ Qualquer Endpoint chamado com **localidades/cache/*** realizará as consultas à
 > - Com cache: localidades/cache/clear
 
 ---
+

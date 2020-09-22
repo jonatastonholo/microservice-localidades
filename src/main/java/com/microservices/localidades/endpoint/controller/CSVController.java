@@ -4,10 +4,12 @@ import com.microservices.localidades.endpoint.service.IBGEApiService;
 import com.microservices.localidades.util.CSVUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
+
 import javax.servlet.http.HttpServletResponse;
-import java.io.OutputStream;
 
 /**
  * @author Jônatas Tonholo
@@ -18,25 +20,29 @@ import java.io.OutputStream;
 @Slf4j
 public class CSVController {
     @Autowired
-    private IBGEApiService _IBGEApiService;
+    private IBGEApiService ibgeApiService;
 
     /**
      * Request to IBGE's API the Localidades without caching and return a CSV file as response
      * @return OutputStream
      */
     @GetMapping(value = "localidades/csv")
-    public OutputStream getLocalidadesWithoutCache(HttpServletResponse response) {
+    public ResponseEntity getLocalidadesWithoutCache(HttpServletResponse response) {
         log.debug("CSVController.getLocalidadesWithoutCache");
         log.info("localidades/csv");
         try {
             response.setContentType("text/csv");
             response.setHeader("Content-Disposition", "attachment; filename=localidades.csv");
-            return CSVUtils.getCsvResponse(response, this._IBGEApiService.getLocalidadesWithoutCache());
+            return ResponseEntity
+                    .status(HttpStatus.OK)
+                    .body(CSVUtils.getCsvResponse(response, this.ibgeApiService.getLocalidadesWithoutCache()));
         }
         catch (Exception e) {
             final String msg = "Error while getting the CSV of Localidades without cache";
             log.error(msg);
-            return null; // FIXME: Improve that!
+            return ResponseEntity
+                    .status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body(msg);
         }
     }
 
@@ -45,18 +51,22 @@ public class CSVController {
      * @return OutputStream
      */
     @GetMapping(value="localidades/cache/csv")
-    public OutputStream getLocalidadesWithCache(HttpServletResponse response) {
+    public ResponseEntity getLocalidadesWithCache(HttpServletResponse response) {
         log.debug("CSVController.getLocalidadesWithCache");
         log.info("localidades/cache/csv");
         try{
             response.setContentType("text/csv");
             response.setHeader("Content-Disposition", "attachment; filename=localidades.csv");
-            return CSVUtils.getCsvResponse(response, this._IBGEApiService.getLocalidadesWithCache());
+            return ResponseEntity
+                    .status(HttpStatus.OK)
+                    .body(CSVUtils.getCsvResponse(response, this.ibgeApiService.getLocalidadesWithCache()));
         }
         catch (Exception e) {
             final String msg = "Error while getting the CSV of Localidades with cache";
             log.error(msg);
-            return null; // FIXME: Improve that!
+            return ResponseEntity
+                    .status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body(msg);
         }
     }
 }

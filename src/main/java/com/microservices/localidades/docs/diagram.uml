@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement />
+  <nodes>
+    <node x="1060.5" y="77.0">com.microservices.localidades.model.EIBGEApiURI</node>
+    <node x="2121.5" y="2751.0">com.microservices.localidades.util.CSVUtils</node>
+    <node x="-32.0" y="3013.0">com.microservices.localidades.LocalidadesApplication</node>
+    <node x="947.0" y="950.5">com.microservices.localidades.endpoint.controller.JSONControllerTest</node>
+    <node x="586.0" y="1317.5">com.microservices.localidades.model.Municipio</node>
+    <node x="1015.5" y="350.5">com.microservices.localidades.config.SchedulesConfig</node>
+    <node x="579.0" y="1597.5">com.microservices.localidades.model.Microrregiao</node>
+    <node x="1744.5" y="2142.5">com.microservices.localidades.model.Localidade</node>
+    <node x="895.5" y="2230.5">com.microservices.localidades.endpoint.service.IBGEApiServiceTest</node>
+    <node x="2144.5" y="2613.0">com.microservices.localidades.util.FileUtils</node>
+    <node x="1638.0" y="2739.5">com.microservices.localidades.endpoint.controller.CSVController</node>
+    <node x="260.0" y="2653.0">com.microservices.localidades.model.LocalidadeInterface</node>
+    <node x="580.0" y="1877.5">com.microservices.localidades.model.Mesorregiao</node>
+    <node x="2654.5" y="-38.5">com.microservices.localidades.component.IBGELocalidadesHTTPClient</node>
+    <node x="204.0" y="-27.0">com.microservices.localidades.exceptions.APILocalidadesException</node>
+    <node x="587.0" y="2517.5">com.microservices.localidades.model.Regiao</node>
+    <node x="954.5" y="739.5">com.microservices.localidades.endpoint.controller.JSONController</node>
+    <node x="1304.0" y="2164.0">com.microservices.localidades.endpoint.service.IBGEApiService</node>
+    <node x="577.5" y="893.0">com.microservices.localidades.util.StringUtils</node>
+    <node x="587.0" y="2186.5">com.microservices.localidades.model.UF</node>
+    <node x="513.0" y="1026.5">com.microservices.localidades.endpoint.controller.NomeCidadeController</node>
+    <node x="-28.0" y="1070.5">com.microservices.localidades.endpoint.controller.NomeCidadeControllerTest</node>
+    <node x="264.0" y="1877.5">com.microservices.localidades.model.LocalidadeAbstract</node>
+    <node x="1021.0" y="550.0">com.microservices.localidades.endpoint.controller.IBGEApiController</node>
+    <node x="1721.0" y="2488.5">com.microservices.localidades.endpoint.controller.CSVControllerTest</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="com.microservices.localidades.endpoint.service.IBGEApiService" target="com.microservices.localidades.model.EIBGEApiURI">
+      <point x="-13.333333333333258" y="-116.0" />
+      <point x="1426.6666666666667" y="160.0" />
+      <point x="99.5" y="-0.0" />
+    </edge>
+    <edge source="com.microservices.localidades.endpoint.controller.CSVControllerTest" target="com.microservices.localidades.model.Localidade">
+      <point x="0.0" y="-71.5" />
+      <point x="0.0" y="137.5" />
+    </edge>
+    <edge source="com.microservices.localidades.model.Mesorregiao" target="com.microservices.localidades.model.LocalidadeAbstract">
+      <point x="-100.0" y="-0.0" />
+      <point x="96.0" y="-0.0" />
+    </edge>
+    <edge source="com.microservices.localidades.endpoint.service.IBGEApiService" target="com.microservices.localidades.model.Municipio">
+      <point x="-93.33333333333326" y="-116.0" />
+      <point x="1346.6666666666667" y="1400.0" />
+      <point x="94.0" y="-0.0" />
+    </edge>
+    <edge source="com.microservices.localidades.model.Regiao" target="com.microservices.localidades.model.LocalidadeAbstract">
+      <point x="-93.0" y="-0.0" />
+      <point x="400.0" y="2600.0" />
+      <point x="40.0" y="82.5" />
+    </edge>
+    <edge source="com.microservices.localidades.endpoint.controller.NomeCidadeControllerTest" target="com.microservices.localidades.endpoint.controller.NomeCidadeController">
+      <point x="148.0" y="-0.0" />
+      <point x="-167.0" y="-0.0" />
+    </edge>
+    <edge source="com.microservices.localidades.config.SchedulesConfig" target="com.microservices.localidades.endpoint.service.IBGEApiService">
+      <point x="104.5" y="-0.0" />
+      <point x="1413.3333333333333" y="400.0" />
+      <point x="-26.666666666666742" y="-116.0" />
+    </edge>
+    <edge source="com.microservices.localidades.endpoint.controller.NomeCidadeController" target="com.microservices.localidades.model.Municipio">
+      <point x="0.0" y="93.5" />
+      <point x="0.0" y="-82.5" />
+    </edge>
+    <edge source="com.microservices.localidades.endpoint.service.IBGEApiService" target="com.microservices.localidades.model.Localidade">
+      <point x="136.0" y="-0.0" />
+      <point x="-95.5" y="-0.0" />
+    </edge>
+    <edge source="com.microservices.localidades.endpoint.controller.NomeCidadeController" target="com.microservices.localidades.endpoint.service.IBGEApiService">
+      <point x="167.0" y="-0.0" />
+      <point x="1360.0" y="1120.0" />
+      <point x="-80.0" y="-116.0" />
+    </edge>
+    <edge source="com.microservices.localidades.endpoint.controller.NomeCidadeController" target="com.microservices.localidades.exceptions.APILocalidadesException">
+      <point x="-167.0" y="-40.0" />
+      <point x="320.0" y="1080.0" />
+      <point x="0.0" y="27.0" />
+    </edge>
+    <edge source="com.microservices.localidades.endpoint.controller.IBGEApiController" target="com.microservices.localidades.endpoint.service.IBGEApiService">
+      <point x="99.0" y="-0.0" />
+      <point x="1400.0" y="600.0" />
+      <point x="-40.0" y="-116.0" />
+    </edge>
+    <edge source="com.microservices.localidades.util.CSVUtils" target="com.microservices.localidades.util.FileUtils">
+      <point x="0.0" y="-49.0" />
+      <point x="0.0" y="27.0" />
+    </edge>
+    <edge source="com.microservices.localidades.endpoint.service.IBGEApiServiceTest" target="com.microservices.localidades.model.Municipio">
+      <point x="0.0" y="-49.5" />
+      <point x="1000.0" y="1440.0" />
+      <point x="94.0" y="40.0" />
+    </edge>
+    <edge source="com.microservices.localidades.model.UF" target="com.microservices.localidades.model.Regiao">
+      <point x="0.0" y="93.5" />
+      <point x="0.0" y="-82.5" />
+    </edge>
+    <edge source="com.microservices.localidades.endpoint.controller.JSONController" target="com.microservices.localidades.endpoint.service.IBGEApiService">
+      <point x="125.5" y="-0.0" />
+      <point x="1386.6666666666667" y="800.0" />
+      <point x="-53.33333333333326" y="-116.0" />
+    </edge>
+    <edge source="com.microservices.localidades.model.Municipio" target="com.microservices.localidades.model.LocalidadeAbstract">
+      <point x="-94.0" y="-0.0" />
+      <point x="360.0" y="1400.0" />
+      <point x="0.0" y="-82.5" />
+    </edge>
+    <edge source="com.microservices.localidades.endpoint.service.IBGEApiServiceTest" target="com.microservices.localidades.model.UF">
+      <point x="-104.5" y="-0.0" />
+      <point x="93.0" y="-0.0" />
+    </edge>
+    <edge source="com.microservices.localidades.model.Microrregiao" target="com.microservices.localidades.model.LocalidadeAbstract">
+      <point x="-101.0" y="-0.0" />
+      <point x="400.0" y="1680.0" />
+      <point x="40.0" y="-82.5" />
+    </edge>
+    <edge source="com.microservices.localidades.endpoint.service.IBGEApiServiceTest" target="com.microservices.localidades.endpoint.service.IBGEApiService">
+      <point x="104.5" y="-0.0" />
+      <point x="-136.0" y="-0.0" />
+    </edge>
+    <edge source="com.microservices.localidades.model.Municipio" target="com.microservices.localidades.model.Microrregiao">
+      <point x="0.0" y="82.5" />
+      <point x="0.0" y="-82.5" />
+    </edge>
+    <edge source="com.microservices.localidades.endpoint.service.IBGEApiService" target="com.microservices.localidades.model.UF">
+      <point x="-120.0" y="-116.0" />
+      <point x="1320.0" y="2120.0" />
+      <point x="720.0" y="2120.0" />
+      <point x="40.0" y="-93.5" />
+    </edge>
+    <edge source="com.microservices.localidades.model.Microrregiao" target="com.microservices.localidades.model.Mesorregiao">
+      <point x="0.0" y="82.5" />
+      <point x="0.0" y="-82.5" />
+    </edge>
+    <edge source="com.microservices.localidades.endpoint.service.IBGEApiService" target="com.microservices.localidades.exceptions.APILocalidadesException">
+      <point x="0.0" y="-116.0" />
+      <point x="1440.0" y="0.0" />
+      <point x="116.0" y="-0.0" />
+    </edge>
+    <edge source="com.microservices.localidades.model.LocalidadeAbstract" target="com.microservices.localidades.model.LocalidadeInterface">
+      <point x="0.0" y="82.5" />
+      <point x="0.0" y="-27.0" />
+    </edge>
+    <edge source="com.microservices.localidades.endpoint.controller.CSVControllerTest" target="com.microservices.localidades.endpoint.service.IBGEApiService">
+      <point x="-119.0" y="-0.0" />
+      <point x="1480.0" y="2560.0" />
+      <point x="40.0" y="116.0" />
+    </edge>
+    <edge source="com.microservices.localidades.endpoint.service.IBGEApiServiceTest" target="com.microservices.localidades.model.Regiao">
+      <point x="0.0" y="49.5" />
+      <point x="1000.0" y="2600.0" />
+      <point x="93.0" y="-0.0" />
+    </edge>
+    <edge source="com.microservices.localidades.model.UF" target="com.microservices.localidades.model.LocalidadeAbstract">
+      <point x="-93.0" y="-0.0" />
+      <point x="440.0" y="2280.0" />
+      <point x="80.0" y="82.5" />
+    </edge>
+    <edge source="com.microservices.localidades.endpoint.controller.CSVControllerTest" target="com.microservices.localidades.endpoint.controller.CSVController">
+      <point x="119.0" y="-0.0" />
+      <point x="2560.0" y="2560.0" />
+      <point x="2560.0" y="2920.0" />
+      <point x="1840.0" y="2920.0" />
+      <point x="0.0" y="60.5" />
+    </edge>
+    <edge source="com.microservices.localidades.endpoint.controller.CSVController" target="com.microservices.localidades.util.CSVUtils">
+      <point x="202.0" y="-0.0" />
+      <point x="-198.5" y="-0.0" />
+    </edge>
+    <edge source="com.microservices.localidades.model.Mesorregiao" target="com.microservices.localidades.model.UF">
+      <point x="0.0" y="82.5" />
+      <point x="0.0" y="-93.5" />
+    </edge>
+    <edge source="com.microservices.localidades.endpoint.controller.JSONControllerTest" target="com.microservices.localidades.endpoint.controller.JSONController">
+      <point x="0.0" y="-49.5" />
+      <point x="0.0" y="60.5" />
+    </edge>
+    <edge source="com.microservices.localidades.endpoint.controller.CSVController" target="com.microservices.localidades.endpoint.service.IBGEApiService">
+      <point x="-202.0" y="-0.0" />
+      <point x="1440.0" y="2800.0" />
+      <point x="0.0" y="116.0" />
+    </edge>
+    <edge source="com.microservices.localidades.endpoint.controller.NomeCidadeController" target="com.microservices.localidades.util.StringUtils">
+      <point x="0.0" y="-93.5" />
+      <point x="0.0" y="27.0" />
+    </edge>
+  </edges>
+  <settings layout="Directed Orthogonal" zoom="0.34895628200078754" x="2274.4584654927066" y="1100.9392329303046" />
+  <SelectedNodes>
+    <node>com.microservices.localidades.LocalidadesApplication</node>
+  </SelectedNodes>
+  <Categories>
+    <Category>Fields</Category>
+    <Category>Methods</Category>
+    <Category>Properties</Category>
+  </Categories>
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+

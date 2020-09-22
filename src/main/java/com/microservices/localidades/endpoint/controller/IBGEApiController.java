@@ -8,8 +8,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.List;
-
 /**
  * @author Jônatas Tonholo
  *
@@ -20,7 +18,7 @@ import java.util.List;
 @Slf4j
 public class IBGEApiController {
     @Autowired
-    private IBGEApiService _IBGEApiService;
+    private IBGEApiService ibgeApiService;
 
     /**
      * Clear the cache of Localidades from IBGEApiService
@@ -30,6 +28,6 @@ public class IBGEApiController {
     public ResponseEntity clearCache() {
         log.debug("IBGEApiController.clearCacheLocalidades");
         log.info("localidades/cache/clear");
-        return ResponseEntity.ok(this._IBGEApiService.cleanLocalidadesCache());
+        return ResponseEntity.ok(this.ibgeApiService.cleanLocalidadesCache());
     }
 }

@@ -17,7 +17,7 @@ import org.springframework.scheduling.annotation.Scheduled;
 public class SchedulesConfig {
 
     @Autowired
-    private IBGEApiService _IBGEApiService;
+    private IBGEApiService ibgeApiService;
 
     /**
      * Automatic cache cleaning each 1 hour
@@ -26,6 +26,6 @@ public class SchedulesConfig {
     private void cleanCache() {
         log.info("SchedulesConfig.cleanCache");
         log.info("Cache cleaned by configurated timeout");
-        _IBGEApiService.cleanLocalidadesCache();
+        ibgeApiService.cleanLocalidadesCache();
     }
 }

@@ -1,5 +1,7 @@
 package com.microservices.localidades.endpoint.service;
 
+import com.microservices.localidades.exceptions.APILocalidadesException;
+import com.microservices.localidades.model.EIBGEApiURI;
 import com.microservices.localidades.model.Localidade;
 import com.microservices.localidades.model.Municipio;
 import com.microservices.localidades.model.UF;
@@ -25,9 +27,8 @@ import java.util.List;
 @Slf4j
 public class IBGEApiService {
     @Autowired
-    private WebClient _IBGELocalidadesWebClient;
-    private final String uriMunicipios = "/estados/{UF}/municipios";
-    private final String uriUFs = "/estados";
+    private WebClient webClientIBGELocalidades;
+
 
     /**
      * Get the UF list from IBGE REST API
@@ -38,9 +39,9 @@ public class IBGEApiService {
         log.debug("IBGEApiService.getUFs");
         log.info("Getting UFs...");
         try {
-            final Mono<ResponseEntity<List<UF>>> monoUFs = this._IBGELocalidadesWebClient
+            final Mono<ResponseEntity<List<UF>>> monoUFs = this.webClientIBGELocalidades
                     .method(HttpMethod.GET)
-                    .uri(uriUFs)
+                    .uri(EIBGEApiURI.UF.getUri())
                     .retrieve()
                     .toEntityList(UF.class);
             // Wait for the response to continue
@@ -61,14 +62,14 @@ public class IBGEApiService {
     public List<Municipio> getMunicipios(List<UF> ufs) {
         log.debug("IBGEApiService.getMunicipios");
         log.info("Getting 'municipios'...");
-        final List<Municipio> municipios = new ArrayList<Municipio>();
+        final List<Municipio> municipios = new ArrayList<>();
         try {
             for (UF uf : ufs) {
-                if(uf == null) throw new Exception("Error while request 'municipios' from IBGE's API. UF is null!");
+                if(uf == null) throw new APILocalidadesException("Error while request 'municipios' from IBGE's API. UF is null!");
                 log.debug("Getting 'municipios' from " + uf.getSigla());
-                final Mono<ResponseEntity<List<Municipio>>> monoMunicipios = this._IBGELocalidadesWebClient
+                final Mono<ResponseEntity<List<Municipio>>> monoMunicipios = this.webClientIBGELocalidades
                         .get()
-                        .uri(uriMunicipios.replace("{UF}", uf.getSigla()))
+                        .uri(EIBGEApiURI.MUNICIPIOS.getUri().replace("{UF}", uf.getSigla()))
                         .retrieve()
                         .toEntityList(Municipio.class);
                 // Wait for the response to continue
@@ -89,7 +90,7 @@ public class IBGEApiService {
     @Cacheable("getLocalidadesWithCache")
     public List<Localidade> getLocalidadesWithCache() {
         log.debug("IBGEApiService.getLocalidadesWithCache");
-        final List<Localidade> localidades = new ArrayList();
+        final List<Localidade> localidades = new ArrayList<>();
         try {
 
             // Obtém a lista de UFs da API
